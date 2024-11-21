@@ -1,0 +1,66 @@
+<div class="container">
+    
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- FontAwesome CSS for icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=RocknRoll+One&display=swap" rel="stylesheet"><link rel="stylesheet" href="darkMode.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // カーソル要素を作成
+        const cursor = document.createElement("div");
+        cursor.classList.add("custom-cursor");
+        document.body.appendChild(cursor);
+
+        // カーソルの位置を更新
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+        });
+
+        // ボタンやリンク上でクリック時のエフェクト
+        document.addEventListener("mousedown", () => {
+            cursor.style.transform = "scale(0.8)";
+        });
+
+        document.addEventListener("mouseup", () => {
+            cursor.style.transform = "scale(1)";
+        });
+    });
+
+</script>
+    </head>
+    <p><br><br><br></p>
+    <h2>お子様の情報を入力してください</h2>
+    <form id="child-form" onsubmit="handleSubmit(event)">
+        <div class="child-info-form">
+            <div class="form-group">
+                <label for="child-name">お子さんのお名前:</label>
+                <input type="text" id="child-name" name="child-name" required placeholder="例: 田中太郎">
+            </div>
+
+            <div class="form-group">
+                <label for="child-age">お子さんの年齢:</label>
+                <input type="number" id="child-age" name="child-age" required placeholder="例: 7">
+            </div>
+
+            <div class="form-group">
+                <label for="child-symptoms">症状:</label>
+                <textarea id="child-symptoms" name="child-symptoms" rows="4" required placeholder="例: 発熱、咳など"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="送信" class="submit-button">
+            </div>
+        </div>
+    </form>
+
+    <div class="completion-message" id="completion-message">
+        <p>送信が完了しました！</p>
+        <p>次はホームに戻り病児保育可能者検索の下にあるボタンを押してください。</p>
+        <button class="home-button" onclick="window.location.href='index.html'">ホームに戻る</button>
+    </div>
+</div>
+

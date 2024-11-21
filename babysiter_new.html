@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=RocknRoll+One&display=swap" rel="stylesheet">    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>病児保育可能者募集サイト</title>
+    <link rel="stylesheet" href="darkMode.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // カーソル要素を作成
+            const cursor = document.createElement("div");
+            cursor.classList.add("custom-cursor");
+            document.body.appendChild(cursor);
+    
+            // カーソルの位置を更新
+            document.addEventListener("mousemove", (e) => {
+                cursor.style.left = `${e.pageX}px`;
+                cursor.style.top = `${e.pageY}px`;
+            });
+    
+            // ボタンやリンク上でクリック時のエフェクト
+            document.addEventListener("mousedown", () => {
+                cursor.style.transform = "scale(0.8)";
+            });
+    
+            document.addEventListener("mouseup", () => {
+                cursor.style.transform = "scale(1)";
+            });
+        });
+    
+    </script>
+</head>
+<body>
+    <button id="darkModeToggle"></button>
+    <script src="darkMode.js"></script>
+    <header>
+        <h1><a href="index.html">病児保育可能者募集サイト</a></h1>
+    </header>
+    
+    
+    <main>
+        <p><br><br><br><br></p>
+        <p>病児保育をしてもらうことができなくて困っている人がいます</p>
+
+        <!-- 送信完了メッセージ -->
+        <div id="confirmationMessage" class="hidden">
+            送信が完了しました！<br>ご協力ありがとうございます。<br>利用者からの連絡が来ますので、それまで普段通り生活していただければと思います。どうぞよろしくお願いいたします。
+        </div>
+
+        <form id="addBabySitter">
+            <table>
+                <tr>
+                    <td><label for="username">氏名:</label></td>
+                    <td><input type="text" id="username" name="username" placeholder="氏名" required></td>
+                </tr>
+                <tr>
+                    <td><label for="address">住所:</label></td>
+                    <td><input type="text" id="address" name="address" placeholder="住所" required></td>
+                </tr>
+                <tr>
+                    <td><label for="education">最終学歴:</label></td>
+                    <td><input type="text" id="education" name="education" placeholder="最終学歴" required></td>
+                </tr>
+                <tr>
+                    <td><label for="strength">自身の強み:</label></td>
+                    <td><input type="text" id="strength" name="strength" placeholder="自分の強み" required></td>
+                </tr>
+                <tr>
+                    <td><label for="career">今までのキャリア:</label></td>
+                    <td><input type="text" id="career" name="career" placeholder="今までのキャリア" required></td>
+                </tr>
+                <tr>
+                    <td><label for="capacity">受け付けられる人数:</label></td>
+                    <td><input type="number" id="capacity" name="capacity" placeholder="受け付けられる人数" min="1" required></td>
+                </tr>
+                <tr>
+                    <td><label for="age">年齢:</label></td>
+                    <td><input type="number" id="age" name="age" placeholder="年齢" min="1" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">送信</button></td>
+                </tr>
+            </table>
+        </form>
+    </main>
+    
+    <footer>
+        <p>ここの個人情報を入力してください</p>
+    </footer>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>

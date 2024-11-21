@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>病児保育可能者募集</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=RocknRoll+One&display=swap" rel="stylesheet">    <link rel="stylesheet" href="darkMode.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // カーソル要素を作成
+            const cursor = document.createElement("div");
+            cursor.classList.add("custom-cursor");
+            document.body.appendChild(cursor);
+    
+            // カーソルの位置を更新
+            document.addEventListener("mousemove", (e) => {
+                cursor.style.left = `${e.pageX}px`;
+                cursor.style.top = `${e.pageY}px`;
+            });
+    
+            // ボタンやリンク上でクリック時のエフェクト
+            document.addEventListener("mousedown", () => {
+                cursor.style.transform = "scale(0.8)";
+            });
+    
+            document.addEventListener("mouseup", () => {
+                cursor.style.transform = "scale(1)";
+            });
+        });
+    
+    </script>
+</head>
+<body>
+
+<header>
+    <h1><a href="index.html">病児保育可能者募集サイト</a></h1>
+    <button id="darkModeToggle"></button>
+    <script src="darkMode.js"></script>
+</header>
+
+<div class="main-visual">
+    <h2>病児保育のサポートをお願いします</h2>
+    <p>
+        当サイトでは、病児保育を必要とする家庭と、そのサポートを行う時間がある保育士や看護師の経験を持った方々とをつなぐことを目的としています。
+        あなたのスキルを活かして、困っている家庭を助けるお手伝いをしませんか？
+    </p>
+
+    <div class="info-section">
+        <h3>募集要項</h3>
+        <ul>
+            <li>1,看護師資格または保育士資格をお持ちの方</li>
+            <li>2,病児保育に興味がある方</li>
+            <li>3,柔軟な勤務時間に対応できる方</li>
+        </ul>
+
+        <h3>応募方法</h3>
+        <p>
+            保育可能者の個人情報や住所などを入力してもらいます。下記のボタンからページに進んでください。
+        </p>
+        <a href="byouinn_new.html" class="button">病院登録</a>
+        <a href="babysiter_new.html" class="button">個人登録</a>
+
+        <h3>親向け情報</h3>
+        <p>
+            子どもの情報などを入力してもらいます。下記のボタンからページに進んでください。
+        </p>
+        <a href="kodomojouhounyuuryoku.html" class="button">入力</a>
+
+        <h3>病児保育可能者検索</h3>
+        <p>
+        　近隣にいる病児保育可能者を確認できます。下記のボタンからページに進んでください。
+        </p>
+        <a href="kennnsaku.html" class="button">検索</a>
+
+        <h3>近隣の病院の空き情報</h3>
+        <p>
+            近隣の病院の空き状況を確認できます。下記のボタンからページに進んでください。
+        </p>
+        <a href="byouinnakijouhou.html" class="button">病院情報</a>  
+    </div>
+</div>
+</body>
+</html>

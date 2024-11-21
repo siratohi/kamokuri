@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=3.0">
+    <title>カモクリ</title>
+    <meta http-equiv="refresh" content="2; url=home.html">
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=RocknRoll+One&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // カーソル要素を作成
+            const cursor = document.createElement("div");
+            cursor.classList.add("custom-cursor");
+            document.body.appendChild(cursor);
+    
+            // カーソルの位置を更新
+            document.addEventListener("mousemove", (e) => {
+                cursor.style.left = `${e.pageX}px`;
+                cursor.style.top = `${e.pageY}px`;
+            });
+    
+            // ボタンやリンク上でクリック時のエフェクト
+            document.addEventListener("mousedown", () => {
+                cursor.style.transform = "scale(0.8)";
+            });
+    
+            document.addEventListener("mouseup", () => {
+                cursor.style.transform = "scale(1)";
+            });
+        });
+    
+    </script>
+    <style>
+        /* ページ全体のスタイル */
+        body {
+            margin: 0;
+            background-color: #115023;
+            font-family: 'Kiwi Maru', serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* コンテナの中央揃え */
+        #kamokuriContainer {
+            text-align: center;
+            animation: fadeOut 2s ease-in-out forwards;
+        }
+
+        /* カモクリ画像 */
+        #kamokuri {
+            width: auto;
+            height: 500px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* テキスト表示 */
+        #loadingText {
+            font-size: 1.2rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* フェードインアニメーション */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* フェードアウトアニメーション */
+        @keyframes fadeOut {
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="kamokuriContainer">
+        <img id="kamokuri" src="kamokuri.png" alt="カモクリの画像">
+        <p id="loadingText">次のページに移動しています...</p>
+    </div>
+</body>
+</html>

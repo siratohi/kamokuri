@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>病児預かり可能病院map</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- FontAwesome CSS for icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=RocknRoll+One&display=swap" rel="stylesheet"><link rel="stylesheet" href="darkMode.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // カーソル要素を作成
+        const cursor = document.createElement("div");
+        cursor.classList.add("custom-cursor");
+        document.body.appendChild(cursor);
+
+        // カーソルの位置を更新
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+        });
+
+        // ボタンやリンク上でクリック時のエフェクト
+        document.addEventListener("mousedown", () => {
+            cursor.style.transform = "scale(0.8)";
+        });
+
+        document.addEventListener("mouseup", () => {
+            cursor.style.transform = "scale(1)";
+        });
+    });
+
+</script>
+</head>
+<body>
+
+  <button id="darkModeToggle"></button>
+  <script src="darkMode.js"></script>
+  <!-- ヘッダー -->
+  <header>
+    <h1><a href="index.html">病児預かり可能病院検索結果</a><h1>
+  </header>
+
+  <!-- マップ表示エリア -->
+  <div id="map"></div>
+
+  <!-- 位置情報取得ボタン -->
+  <button id="locateButton">
+    <i class="fa fa-map-marker"></i>
+  </button>
+
+  <!-- 結果リストの表示エリア -->
+  <div id="resultContainer">
+    <h2>病児預かり可能病院リスト</h2>
+    <ul id="resultList"></ul>
+    <button id="queryDataButton">検索</button>
+  </div>
+
+  <!-- Firebase SDKとカスタムJavaScriptファイル -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+  <script src="script.js" type="module"></script>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([35.16548515834528, 136.90491540044457], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var babysitterIcon = L.icon({
+      iconUrl: 'lawson.jpg',
+      iconSize: [30, 30],
+      iconAnchor: [15, 20],
+      popupAnchor: [0, -20]
+    });
+
+    L.marker([35.16521672821076, 136.90443335660663], {icon: babysitterIcon}).addTo(map)
+      .bindPopup("<b>病児預かり可能病院</b>").openPopup();
+
+    let currentLocationMarker = null;
+
+    function getCurrentLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+
+          map.setView([lat, lng], 15);
+
+          if (currentLocationMarker) {
+            map.removeLayer(currentLocationMarker);
+          }
+
+          currentLocationMarker = L.marker([lat, lng]).addTo(map)
+            .bindPopup("現在地").openPopup();
+          
+        }, function(error) {
+          handleError(error);
+        });
+      } else {
+        alert("位置情報が取得できません。");
+      }
+    }
+
+    function handleError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          alert("位置情報の利用が許可されていません。");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("位置情報が取得できませんでした。");
+          break;
+        case error.TIMEOUT:
+          alert("位置情報の取得にタイムアウトしました。");
+          break;
+        default:
+          alert("位置情報の取得でエラーが発生しました。");
+          break;
+      }
+    }
+
+    // Geocoding APIで住所を検索し、地図上に表示する関数
+    async function searchAddress() {
+      const address = document.getElementById("addressInput").value;
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`);
+      const data = await response.json();
+
+      if (data.length > 0) {
+        const lat = data[0].lat;
+        const lon = data[0].lon;
+
+        // マップの表示位置を住所の位置に移動
+        map.setView([lat, lon], 15);
+
+        // 住所の位置にピンを立てる
+        L.marker([lat, lon]).addTo(map)
+          .bindPopup(`<b>検索された住所</b><br>${address}`).openPopup();
+      } else {
+        alert("住所が見つかりませんでした。");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", getCurrentLocation);
+    document.getElementById('locateButton').addEventListener('click', getCurrentLocation);
+    document.getElementById('searchButton').addEventListener('click', searchAddress);
+
+  </script>
+
+</body>
+</html>

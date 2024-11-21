@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- 文書タイプの指定（HTML文書であることを示す） -->
+  <meta charset="UTF-8">
+  <!-- ビューポート設定：スマホやタブレットなど様々なデバイスに対応 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ページのタイトル（タブやブックマークに表示される） -->
+  <title>Firestore サンプル</title>
+</head>
+<body>
+  <!-- ページの見出し（タイトル） -->
+  <h1>Firestoreにデータを追加してクエリを実行する</h1>
+
+  <!-- データ追加フォーム：名前と年齢を入力するフォーム -->
+  <form id="addDataForm">
+    <label for="name">名前:</label>
+    <!-- 名前を入力するテキストボックス -->
+    <input type="text" id="name" required>
+    <label for="age">年齢:</label>
+    <!-- 年齢を入力する数値ボックス -->
+    <input type="number" id="age" required>
+    <!-- データを追加するボタン -->
+    <button type="submit">データを追加</button>
+  </form>
+
+  <!-- データをFirestoreから取得するためのボタン -->
+  <button id="queryDataButton">データをクエリ</button>
+  <!-- クエリ結果を表示するためのリスト -->
+  <ul id="resultList"></ul>
+
+  <!-- Firebase SDKの読み込み -->
+  <!-- FirebaseのアプリとFirestore（データベース）を利用するためのライブラリを読み込む -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+  
+  <!-- 自分で作成したスクリプト（script.js）を読み込む -->
+  <script src="script.js" type="module"></script>
+</body>
+</html>
